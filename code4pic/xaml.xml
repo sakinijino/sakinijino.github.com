@@ -1,0 +1,16 @@
+<Canvas x:Name="Reflection" Grid.Row="0" Grid.Column="0" 
+        Opacity="{Binding ElementName=canvas, Mode=TwoWay, Path=Opacity}">
+  <Image x:Name="ReflectionTile_00" 
+         Source="{Binding ElementName=ImageTile_00, Mode=TwoWay, Path=Source}" 
+         Opacity="{Binding ElementName=ImageTile_00, Mode=TwoWay, Path=Opacity}" 
+         Width="120" Height="93" Margin="5,5,0,0" Stretch="Fill" Cursor="Hand">
+    <Image.Effect>
+      <DropShadowEffect Opacity="0.6" ShadowDepth="3"/>
+    </Image.Effect>
+  </Image>
+  <Rectangle x:Name="ReflectionStroke_00" Width="120" Height="93" 
+             Stroke="#FFFFBA00" 
+             Opacity="{Binding ElementName=StrokeHighlight_00, Mode=TwoWay, Path=Opacity}" 
+             Margin="5,5,0,0" StrokeThickness="2"/>
+</Canvas> 
+

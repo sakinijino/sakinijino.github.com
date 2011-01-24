@@ -1,0 +1,196 @@
+﻿# Mp3tag parsing for Douban Web Service (v2.36 and above)
+# 
+# Web source created and maintained by yoyicue
+# Last modified 2009-01-19
+# 
+#
+# Save it in your Mp3tag data directory, i.e.
+# C:\Documents and Settings\*username*\Application Data\Mp3tag\data\sources
+#
+#
+# 用于去豆瓣上下载中文音乐ID3资料与专辑封皮的Mp3tag语法(beta 1.3)
+#
+# 
+# 由yoyicue(yoyicue@gmail.com)创建和更新,最后更新日期 2009年1月25日
+# 将此文件存进您的Mp3tag 数据目录里面,例如
+#
+#
+# C:\Documents and Settings\*用户名*\Application Data\Mp3tag\data\sources
+#
+# 
+# 遵循Creative Commons(创作共用)授权. "署名-非商业用途-保持一致".
+# Attribution-Noncommercial-No Derivative Works 2.5 China Mainland
+# http://creativecommons.org/licenses/by-nc-nd/2.5/cn/
+#
+# #####################################################################
+#
+# 豆瓣图片cdn升级后失效，sakinijino于2009-09-03在beta1.3基础上修复，消除了对于cdn域名的依赖。
+# sakinijino.com
+#
+[Name]=douban.com
+[BasedOn]=http://api.douban.com
+[IndexUrl]=http://api.douban.com/music/subjects?q=%s&max-results=50&start-index=1
+[AlbumUrl]=
+[WordSeperator]=+
+[IndexFormat]=%_url%|%Album%|%Artist%|%_preview%|%Released%|%Publisher%
+[SearchBy]=%album%
+[Encoding]=url-utf-8
+
+[ParserScriptIndex]=...
+# ###################################################################
+#					查询页
+# ###################################################################
+# Uncomment the following line if you want to write some debug output
+# debug "on" "c:\debug_douban_A.html" "10"
+
+findline "<entry>"
+do
+  JoinUntil "</entry>"
+  # Url 
+  findinline "<id>"
+  sayuntil "</id>"
+  say "|"
+  
+  # Album
+  GotoChar 1
+  findinline "<title>"
+  sayuntil "</title>"
+  say "|"
+  
+  # Artist
+  GotoChar 1
+  findinline "<name" 1 1
+  if ">"
+    findinline ">"
+    sayuntil "</name>"
+  endif
+  say "|"
+  
+  # Preview
+  GotoChar 1
+  findinline "<link href=\"http://music.douban.com/subject/"
+  say "http://music.douban.com/subject/"
+  saynextnumber
+  say "|"
+	
+  # Released
+  GotoChar 1
+  findinline "<db:attribute name=\"pubd" 1 1
+  if "ate"
+    findinline "ate\">"
+    sayuntil "</db:attribute>"
+  endif
+  say "|"
+
+  # Publisher
+  GotoChar 1
+  findinline "<db:attribute name=\"publ" 1 1
+  if "isher"
+    findinline "isher\">"
+    sayuntil "</db:attribute>"
+  endif
+  
+  saynewline
+  moveline 1
+  unspace
+while "<entry>"
+
+[ParserScriptAlbum]=...
+# ###################################################################
+#					专辑页
+# ###################################################################
+# Uncomment the following line if you want to write some debug output
+# debug "on" "c:\debug_douban_B.html" "10"
+
+#Output
+findline "<id>"
+outputto "Output"  
+findinline "<id>"
+sayuntil "</id>"
+
+#Album
+findline "<title>"
+outputto "Album"  
+findinline "<title>"
+sayuntil "</title>"
+
+#CoverURL
+findline "<link href="
+do
+  findinline "rel="
+  if "\"image"
+    gotochar 1
+    outputto "coverurl"
+    findinline "<link href=\""
+    sayuntil "spic"
+    say "lpic"
+    findinline "spic"
+    sayuntil "\" rel=\"image\"/>"
+  endif
+  moveline 1
+  unspace
+while "<link href="
+
+gotoline 1
+#Artist
+findline "<name>" 1 1
+unspace
+if "<name>"
+  outputto "Artist"  
+  findinline "<name>"
+  sayuntil "</name>"
+endif
+
+gotoline 1
+# Pubdate
+findline "<db:attribute name=\"pubdate\">" 1 1
+unspace
+if "<db:attribute name=\"pubdate\">"
+  findinline "pubdate\">"
+  outputto "Year"
+  sayuntil "</db:attribute>"
+endif
+
+gotoline 1
+# Pubdate
+findline "<db:attribute name=\"publisher\">" 1 1
+unspace
+if "<db:attribute name=\"publisher\">"
+  findinline "publisher\">"
+  outputto "Publisher"
+  sayuntil "</db:attribute>"
+endif
+
+gotoline 1
+# Tracks Mode 1
+findline "<db:attribute index=" 1 1
+unspace
+if "<db:attribute index="
+  do
+    findinline "name=\"track\">"
+    outputto "tracks"
+    sayuntil "</db:attribute>"
+    say "|"
+    moveline 1
+    unspace
+  while "<db:attribute index="
+endif
+
+gotoline 1
+# Tracks Mode 2
+findline "<db:attribute name=\"tracks\">" 1 1
+unspace
+if "<db:attribute name=\"tracks\">"
+  findinline "</db:attr" 1 1
+  if "ibute"
+    gotochar 1
+    do
+      findinline "tracks\">"
+      outputto "tracks"
+      sayuntil "</db:attribute>"
+      say "|"
+      moveline 1
+      unspace
+    while "<db:attribute name=\"tracks\">"
+  endif
+endif

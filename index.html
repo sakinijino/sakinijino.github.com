@@ -1,36 +1,336 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Qi Zhao (sakinijino)</title>
-<style>
-body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}
-body { margin: 20px 50px; }
-pre {
-    color: #666;
-    font: 14px/1.5em Monaco,"Andale Mono","Lucida Console","Bitstream Vera Sans Mono","Courier New",monospace;
-}
-a { color: #333 }
-a:active, a:hover { text-decoration: underline; }
-</style>
-</head>
-<body>
-<pre>
-  <h1>Qi Zhao (sakinijino)</h1>
-    <a href="proj.html">projs</a>
-    <a href="publication.html">publications</a>
+  <head>
+    <meta charset="utf-8">
+    <title>Qi Zhao (sakinijino)</title>
+    <style>
+      body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}
 
-    <a href="http://sakinijino.com">blog</a>
+      body {padding: 20px; background: #e2e6e9; font: normal 14px Verdana, Arial, Sans-Serif; text-align: left; }
+      p { padding: 0 0 0 20px; line-height:1.8em;}
+      em {font-weight:bold; font-style:italic;}
+      ul, ol { padding: 0 0 0 40px;}
+      ul, ol { line-height: 1.8em; color: #333333;}
+      ul { list-style-type: circle }
+      /* dul double stage ul */
+      ul.dul>li { margin-bottom: 15px;}
+      ul.dul ul { list-style-type: square}
 
-    <a href="http://www.douban.com/people/sakinijino/">douban</a>
-    <a href="http://www.facebook.com/sakinijino">facebook</a>
+      nav { display:block; margin:0 auto 20px; border:1px solid #222; position:relative; background-color:#6a6a6a; font-size:16px; }
+      nav ul { padding:0; margin:0; }
+      nav li { position:relative; float:left; list-style-type:none; }
+      nav ul:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+      nav li a { display:block; padding:5px 25px; border-left:1px solid #999; border-right:1px solid #222; color:#eee; text-decoration:none; }
+      nav li:first-child a { border-left:none; }
+      nav li.last a { border-right:none; }
+      nav ul ul { display:none; width:100%; position:absolute; left:0; background:#6a6a6a; }
+      nav ul ul li { float:none; }
+      nav ul ul a { padding:5px 10px; border-left:none; border-right:none; font-size:14px; }
+      nav ul ul a:hover { background-color:#555; }
 
-    <a href="http://twitter.com/sakinijino">twitter</a>
-    <a href="http://t.sina.com.cn/sakinijino">t.sina</a>
+      section {display: block; background: #fff; padding: 5px 20px; margin:10px auto;}
+      section article { display:block; margin-bottom: 25px; padding-bottom: 15px; border-bottom:1px solid #999;}
+      section article h3 {font-size:20px; text-transform: uppercase; margin: 20px 0 10px;}
+      section article h4 {margin: 20px 0 5px; }
+      section a:link, section a:visited, #post_content a:link, #post_content a:visited { color: #336699;}
+      section a:hover, section a:active, #post_content a:hover, #post_content a:active { color: #fff; background-color: #999;}
 
-    <a href="http://github.com/sakinijino">github</a>
+      #Summary span.lang { float:left; display:block; width:48px; height:48px; margin:2px 5px; background: url("icons.png") no-repeat scroll 0 0 transparent}
+      #Summary #avatar { float: right; margin: 0 50px 0 0;}
+      #lang:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
 
-    sakinijino(at)gmail.com
-</pre>
-</body>
+      #Links ul {margin: 0px 10px; padding: 0px;}
+      #Links ul li {margin:0 5px; padding: 5px; list-style-type:none; float:left; width:140px;}
+      #Links ul:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+      #Links ul li span.link{float:left; display:block; width:48px; height:48px; margin:2px 5px; background: url("icons.png") no-repeat scroll 0 0 transparent}
+      #Links a {line-height:60px;}
+
+      #RPublications ul li a span.pdf {display:block-inline; width:16px; height:16px; background: url("icons.png") no-repeat scroll -58px 0 transparent; padding-left: 20px; }
+
+      #Experience ul li span.logo {float:right; display:block; margin: 0 40px 0 20px; background: url("logos.png") no-repeat scroll 0 0 transparent}
+    </style>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header>
+      <nav id="topNav">
+        <ul>
+          <li>
+            <a href="#">Basic</a>
+            <ul>
+              <li><a href="#Summary">Summary</a></li>
+              <li><a href="#Links">Links</a></li>
+              <li><a href="#Education">Education</a></li>
+              <li><a href="#Awards">Awards</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Research</a>
+            <ul>
+              <li><a href="#Interests">Interests</a></li>
+              <li><a href="#IProjects">Projects</a></li>
+              <li><a href="#RPublications">Publications</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Industry</a>
+            <ul>
+              <li><a href="#Skills">Skills</a></li>
+              <li><a href="#Experience">Experience</a></li>
+              <li><a href="#IProjects">Open Source</a></li>
+              <li><a href="#IPublications">Publications</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section id="Basic">
+      <article id="Summary">
+        <img id="avatar" src="avatar.jpg"></img>
+        <h3>Zhao Qi (赵 祺)</h3>
+        <p>
+        Ph.D. Candidate<br/>
+        <a href="http://www.sei.pku.edu.cn/" target="_blank">Institute of Software</a><br/>
+        School of Electronics Engineering and Computer Science<br/>
+        <a href="http://www.pku.edu.cn/" target="_blank">Peking University</a>, Beijing, 100871, China<br/><br/>
+        Email (GTalk): sakinijino(at)gmail.com<br/>
+        </p>
+        <h4>Language</h4>
+        <p id="lang">
+        <span class="lang" style="background-position: 0px -580px;"></span>
+        <span class="lang" style="background-position: 0px -638px;"></span>
+        </p>
+        <h4>Interests</h4>
+        <p>
+        <a href="http://sakinijino.com/category/book" target="_blank">Reading</a>, <a href="http://sakinijino.com/category/writing" target="_blank">Writing</a>, <a href="http://www.wefootball.org/" target="_blank">Football</a>
+        </p> 
+      </article>
+      <article id="Links">
+        <h3>Links</h3>
+        <ul>
+          <li>
+            <a href="http://sakinijino.com" target="_blank"><span class="link" style="background-position: 0px -522px;"></span>Blog</a>
+          </li>
+          <li>
+            <a href="http://twitter.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -348px;"></span>Twitter</a>
+          </li>
+          <li>
+            <a href="http://www.douban.com/people/sakinijino/" target="_blank"><span class="link" style="background-position: 0px 0px;"></span>Douban</a>
+          </li>
+          <li>
+            <a href="http://t.sina.com.cn/sakinijino" target="_blank"><span class="link" style="background-position: 0px -290px;"></span>T.Sina</a>
+          </li>
+          <li>
+            <a href="http://cn.linkedin.com/pub/qi-zhao/17/1b/961" target="_blank"><span class="link" style="background-position: 0px -232px;"></span>LinkedIn</a>
+          </li>
+          <li>
+            <a href="http://www.facebook.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -116px;"></span>Facebook</a>
+          </li>
+          <li>
+            <a href="http://github.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -406px;"></span>Github</a>
+          </li>
+          <li>
+            <a href="http://wefootball.org" target="_blank"><span class="link" style="background-position: 0px -464px;"></span>Wefootball</a>
+          </li>
+        </ul> 
+      </article>
+      <article id="Education">
+        <h3>Education</h3>
+        <ul>
+          <li>
+          2006.9 - 2012.7 (expected), Peking University, Beijing, China<br/>
+          Ph.D. in Computer Science
+          </li>
+          <li>
+          2002.9 - 2006.7, Peking University, Beijing, China<br/>
+          Bachelor in Computer Science
+          </li>
+        </ul>
+      </article>
+      <article id="Awards">
+        <h3>Awards and Honors</h3>
+        <ul>
+          <li>IBM Global Ph.D. Fellowship Awards, 2010 (<em>one of the 8 winners in China</em>, 2010)</li>
+          <li>Tri-A Student of Peking University, 2009</li>
+          <li>Tri-A Student of Peking University, 2005</li>
+        </ul>
+      </article>
+    </section>
+    <section id="Research">
+      <article id="Interests">
+        <h3>Research Interests</h3>
+        <ul>
+          <li>Rich Internet Application</li>
+          <li>Web 2.0</li>
+          <li>Service Computing</li>
+        </ul> 
+      </article>
+      <article id="RProjects">
+        <h3>Research Projects</h3>
+        <ul class="dul">
+          <li>
+            2009.4 - , <em>Browser-based Middleware for Service-Oriented Rich Client</em>
+            <ul>
+              <li>Proposed new type of middleware, which is embedded in web browsers and encapsulates reusable solutions for developing, deploying and operating rich internet applications.</li>
+              <li>Supported by National Grand Fundamental Research 973 Program of China. </li>
+              <li>Published 6 papers and received <em>2 best paper awards</em>.</li>
+            </ul>
+          </li>
+          <li>
+            2006.9 - , <em>Enterprise Mashup Environment</em>
+            <ul>
+              <li>Proposed the component and composition model of mashup infrastructure, designed an on-the-fly mashup approach</li>
+              <li>Implemented an enterprise mashup tool, iMashup. (<a href="http://imashup.sakinijino.com" target="_blank">Online Demo</a> | Video Demos (<a href="http://www.youtube.com/watch?v=Ehn-69PEiUE" target="_blank">Youtube</a>, <a href="http://v.youku.com/v_show/id_XMjM3ODIxMTQ4.html" target="_blank">Youku</a>) | <a href="https://github.com/sakinijino/imashup" target="_blank">Source Code</a>)</li>
+              <li>Supported by National Grand Fundamental Research 973 Program of China.</li>
+              <li>Published 3 papers.</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+      <article id="RPublications">
+        <h3>Research Publications</h3>
+        <ul class="dul">
+        <li>2010 <ul>
+          <li><em>Qi Zhao</em>, Xuanzhe Liu, Chen Xingrun, Jiyu Huang. Towards a Data Access Framework for Service-Oriented Rich Clients. 2010 International Conference on Service-Oriented Computing and Applications (SOCA 2010). Dec 13-15, Perth, Australia. <a href="publications/soca10da.pdf">[<span class="pdf"></span>pdf]</a></li>
+          <li>Jiyu Huang, Xuanzhe Liu, <em>Qi Zhao</em>, Jianzhu Ma, Gang Huang. A Browser-based Framework for Data Cache in Web-Delivered Service CompositionA Browser-based Framework for Data Cache in Web-Delivered Service Composition. 2010 International Conference on Service-Oriented Computing and Applications (SOCA 2010). Dec 13-15, Perth, Australia. <a href="publications/soca10cache.pdf">[<span class="pdf"></span>pdf]</a></li>
+          <li><em>Qi Zhao</em>, Xuanzhe Liu, Dawei Sun, Tiancheng Liu, Ying Li, Gang Huang. Mashing-up Rich User Interfaces for Human-Interaction in WS-BPEL. 2010 International Conference on Web Services (ICWS 2010), pp 559-566. July 5-10, Miami, USA. <a href="publications/icws10.pdf">[<span class="pdf"></span>pdf]</a></li>
+          <li><em>Qi Zhao</em>, Xuanzhe Liu, Jiyu Huang, Gang Huang. A Browser-based Middleware for Service-Oriented Rich Client. Proceedings of 2010 International Conference on Service Science, pp 22-27. May 12-14, Hangzhou, China. (<em>The ONLY WINNER of Best Paper Award</em> ) (EI: 20103013102043) <a href="publications/icss10.pdf">[<span class="pdf"></span>pdf]</a></li>
+        </ul> </li>
+        <li>2009 <ul>
+          <li><em>Qi Zhao</em>, Jiyu Huang, Xiangping Chen, Gang Huang. Feature Interaction Problems in Web-based Service Composition. 10th International Conference on Feature Interactions (ICFI 2009), pp 234-241. June 11-12, Lisbon, Portugal. <a href="publications/icfi09.pdf">[<span class="pdf"></span>pdf]</a></li>
+          <li>Gang Huang, <em>Qi Zhao</em>, Jiyu Huang, Xuanzhe Liu, Teng Teng, Yong Zhang, Honggang Yuan. Towards Service Composition Middleware Embedded in Web Browser. CyberC 2009. (<em>THE ONLY WINNER of Best Paper Award)</em> (EI: 20095312585909) <a href="publications/cyberc09.pdf">[<span class="pdf"></span>pdf]</a></li>
+        </ul> </li>
+        <li>2008 <ul>
+          <li><em>Qi Zhao</em>, Gang Huang, Jiyu Huang, Xuanzhe Liu, Hong Mei, Ying Li, Ying Chen. An On-the-fly Approach to Web-based Service Composition. Proceedings of 2008 IEEE Service Congress and International Conference on Web Services (ICWS 2008), pp 208-209. September, 2008. Beijing, China. (EI: 20092612153676) <a href="publications/icws08.pdf">[<span class="pdf"></span>pdf]</a></li>
+          <li><em>Qi Zhao</em>, Gang Huang, Xuanzhe Liu, Jiyu Huang, Hong Mei. A Web-based Mashup Environment for On-the-fly Service Composition. Fourth International Symposium on Service-Oriented System Engineering (SOSE 2008), pp 32-37. (EI: 20091211969439) <a href="publications/sose08.pdf">[<span class="pdf"></span>pdf]</a></li>
+          <li><em>Qi Zhao</em>, Gang Huang, Xuanzhe Liu, Jiyu Huang. Towards a Component Model for Web-based Service Composition. Journal of Frontiers of Computer Science and Technology. 2008 2 (4): pp 378-388. <a href="publications/jfcst08.pdf">[<span class="pdf"></span>pdf]</a></li>
+        </ul> </li>
+        </ul>
+      </article>
+    </section>
+    <section id="Industry">
+      <article id="Skills">
+        <h3>Technique Skills</h3>
+        <ul>
+          <li>Javascript/HTML/CSS (jQuery, Dojo, Sproutcore, etc.)</li>
+          <li>Ruby (Ruby on Rails)</li>
+          <li>ActionScript, Python, PHP, Java, dotNet(C#).</li>
+        </ul> 
+      </article>
+      <article id="Experience">
+        <h3>Industrial Experience</h3>
+        <ul class="dul">
+          <li>
+            <span class="logo" style="background-position:0px -50px; width:97px; height:53px;"></span>
+            2010.6 - 2011.2, <em>Ph.D. Fellow Visiting Student at IBM China Research Laboratory</em>
+            <ul>
+              <li>Cloud Platform and Management Team</li>
+              <li>Two Cloud Platforms (TSAM and Jomo) Front-end Integration</li>
+            </ul>
+          </li>
+          <li>
+            <span class="logo" style="background-position:0px 0px; width:178px; height:40px;"></span>
+            2007.7 - 2009.2, <em>Software Engineer Intern at <a href="http://www.douban.com/" target="_blank">Douban.com</a></em>
+            <ul>
+              <li>API Development Team</li>
+              <li><a href="http://www.douban.com/service/apidoc/" target="_blank">Douban API</a> Design and Implementation</li>
+              <li> Embedded Opensocial Applications of Douban Implementation</li>
+            </ul>
+          </li>
+          <li>
+            <span class="logo" style="background-position:0px -50px; width:97px; height:53px;"></span>
+            2006.2 - 2007.6, <em>Softrware Engineer Intern at IBM China Research Laboratory</em>
+            <ul>
+              <li>Service Offering &amp; Delivery Excellence Team</li>
+              <li>An Enterprise Mashup Environment Implementation </li>
+              <li>Browser-Based Graphical Editor Framework (GEF) Design and Implementation</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+      <article id="IProjects">
+        <h3>Open Source Projects</h3>
+        <ul class="dul">
+          <li>
+            2008.1 - , <em><a href="http://www.wefootball.org" target="_blank">Wefootball.org</a>, Architect & Key Programmer</em>
+            <ul>
+              <li>Wefootball.org is a Football Social Networking Website (SNS) based on Ruby on Rails</li>
+              <li><a href="http://www.wefootball.org" target="_blank">Online Site</a> | <a href="https://github.com/sakinijino/wefootball" target="_blank">Source Code</a></li>
+            </ul>
+          </li>
+          <li>
+            2007.4 - , <em>iMashup Environment, Architect & Key Programmer</em>
+            <ul>
+              <li>iMashup in a Javascript-based Mashup Tool for Creating Personalized, Web-based and Service-Oriented Mashup Applications in the Way of WYSIWYG (What You See Is What You Get)</li>
+              <li><a href="http://imashup.sakinijino.com" target="_blank">Online Demo</a> | Video Demos (<a href="http://www.youtube.com/watch?v=Ehn-69PEiUE" target="_blank">Youtube</a>, <a href="http://v.youku.com/v_show/id_XMjM3ODIxMTQ4.html" target="_blank">Youku</a>) | <a href="https://github.com/sakinijino/imashup" target="_blank">Source Code</a></li>
+            </ul>
+          </li>
+          <li>
+            2007.9 – 2007.12, <em>Powerpoint and Paper Management Suite, Architect & Key Programmer</em>
+            <ul>
+              <li>Powerpoint and Paper Management Suite includes the Ruby on Rails based Multiple Users Paper and PPT Management Systems</li>
+              <li>Used in Institute of Molecular Medicine, Peking University</li>
+              <li>Source Code (<a href="https://github.com/sakinijino/Speech-Management-System" target="_blank">PPT Management System</a>, <a href="https://github.com/sakinijino/Paper-Management-System" target="_blank">Paper Management System</a>)</li>
+            </ul>
+          </li>
+          <li>
+            2006.1 – 2006.7, <em>Worldlog Website, Architect & Key Programmer</em>
+            <ul>
+              <li>Worldlog is a PHP based Rich Client Geo-Location Markup Web Application</li>
+              <li><a href="https://github.com/sakinijino/worldlog" target="_blank">Source Code</a></li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+      <article id="IPublications">
+        <h3>Translations</h3>
+        <ul>
+          <li>Jiakuan Ma, <em>Qi Zhao</em>, Shen Liu (2010). <a href="http://www.amazon.cn/Rails%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C-%E6%8B%89%E7%91%9E%E7%89%B9-Simon-St-Laurent/dp/B0031U0AEC/" target="_blank"><i>Learning Rails (Rails学习手册)</i></a>. China Machine Press, China. (7 of the 19 chapters)</li>
+        </ul>
+      </article>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script>
+      (function($){
+
+        //cache nav
+        var nav = $("#topNav");
+
+        //add indicators and hovers to submenu parents
+        nav.find("li").each(function() {
+          if ($(this).find("ul").length > 0) {
+              $(this).mouseenter(function() {
+                $(this).find("ul").stop(true, true).slideDown();
+              });
+              $(this).mouseleave(function() {
+                $(this).find("ul").stop(true, true).slideUp();
+              });
+            }
+          });
+
+        var navlist = $("#topNav>ul>li>a").map(function(i, e){return $(e).text()})
+        var hideall = function(){
+          navlist.each(function(i, v){$('#'+v).hide()});
+        }
+        var showone = function(id){
+          hideall();
+          if (id==null) id=navlist[0];
+          $('#'+id).show();
+        }
+
+        $("#topNav>ul>li>a").each(function(){
+          var e = $(this);
+          e.click(function(){showone(e.text())})
+        });
+        $("#topNav>ul>li>ul>li>a").each(function(){
+          var e = $(this);
+          e.click(function(){e.parent().parent().prev().click()});
+        });
+
+        showone();
+      })(jQuery);
+    </script>
+  </body>
 </html>

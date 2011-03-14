@@ -59,8 +59,71 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <script type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="jquery.colorbox-min.js"></script>
+    <script>
+      $(document).ready(function(){
+        //menu
+        var nav = $("#topNav");
+        showsection = function(id){
+          var tl = $("#topNav>ul>li>a").map(function(i, e){
+            return '#'+$(e).text();
+          })
+          tl.each(function(i,v){$(v).hide()});
+          nav.find("li>ul").hide();
 
+          if (id==null || id=="" || id=="#") id=tl[0];
+
+          if ($.inArray(id, tl)!=-1) $(id).show(); 
+          else {
+            var e = $(nav.find("li>ul>li>a[href='"+id+"']")[0])
+            $(e.parent().parent().prev().attr("href")).show();
+            window.location = String(window.location).replace(/\#.*$/, "") + id;
+          }
+        }
+        nav.find("li").each(function() {
+          if ($(this).find("ul").length > 0) {
+              $(this).mouseenter(function() {
+                $(this).find("ul").show();
+              });
+              $(this).mouseleave(function() {
+                $(this).find("ul").hide();
+              });
+            }
+          });
+
+        //anchor
+        // the hashchange event not supported in ie6,7 and ie8 with compatibility view
+        // the back button breakdown in these browsers.
+        if ($.browser.msie && 
+             ($.browser.version < 8 || 
+             (document.documentMode !== undefined && document.documentMode < 8))) {
+             nav.find("li>a").click(function(){
+               showsection($(this).attr('href'));
+             })
+             $("a.inlineNav").click(function(){
+               showsection($(this).attr('href'));
+             })
+        }
+        else $(window).bind("hashchange", function(){
+          showsection(window.location.hash);
+        });
+        
+        //zoom
+        $("a.pic_zoom").colorbox({opacity:0.7});
+        $("a.video_zoom").each(function(i,v){
+          var e = $(v); 
+          e.attr("target", ''); 
+          e.attr('href', e.attr('rel'));
+          e.attr('rel', '');
+        }); 
+        $("a.video_zoom").colorbox({inline:true,opacity:0.7});
+
+        //init
+        showsection(window.location.hash);
+      });
+    </script>
+    <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-22023987-1']);
       _gaq.push(['_trackPageview']);
@@ -177,7 +240,7 @@
         <h3>Research Projects</h3>
         <ul class="dul">
           <li>
-            2009.4 - , <em>Browser-based Middleware for Service-Oriented Rich Client</em>
+            <h4>2009.4 - , Browser-based Middleware for Service-Oriented Rich Client</h4>
             <ul>
               <li>Proposed new type of middleware, which is embedded in web browsers and encapsulates reusable solutions for developing, deploying and operating rich internet applications.</li>
               <li>Supported by National Grand Fundamental Research 973 Program of China. </li>
@@ -185,7 +248,7 @@
             </ul>
           </li>
           <li>
-            2006.9 - , <em>Enterprise Mashup Environment</em>
+            <h4>2006.9 - , Enterprise Mashup Environment</h4>
             <ul>
               <li>Proposed the component and composition model of mashup infrastructure, designed an on-the-fly mashup approach</li>
               <li>Implemented a mashup tool, iMashup. <br/>
@@ -204,21 +267,22 @@
       <article id="RPublications">
         <h3>Research Publications</h3>
         <ul class="dul">
-        <li>2010 <ul>
-          <li><em>Qi Zhao</em>, Xuanzhe Liu, Chen Xingrun, Jiyu Huang. Towards a Data Access Framework for Service-Oriented Rich Clients. 2010 International Conference on Service-Oriented Computing and Applications (SOCA 2010). Dec 13-15, Perth, Australia. <a href="publications/soca10da.pdf">[<span class="pdf"></span>pdf]</a></li>
-          <li>Jiyu Huang, Xuanzhe Liu, <em>Qi Zhao</em>, Jianzhu Ma, Gang Huang. A Browser-based Framework for Data Cache in Web-Delivered Service CompositionA Browser-based Framework for Data Cache in Web-Delivered Service Composition. 2010 International Conference on Service-Oriented Computing and Applications (SOCA 2010). Dec 13-15, Perth, Australia. <a href="publications/soca10cache.pdf">[<span class="pdf"></span>pdf]</a></li>
-          <li><em>Qi Zhao</em>, Xuanzhe Liu, Dawei Sun, Tiancheng Liu, Ying Li, Gang Huang. Mashing-up Rich User Interfaces for Human-Interaction in WS-BPEL. 2010 International Conference on Web Services (ICWS 2010), pp 559-566. July 5-10, Miami, USA. <a href="publications/icws10.pdf">[<span class="pdf"></span>pdf]</a></li>
-          <li><em>Qi Zhao</em>, Xuanzhe Liu, Jiyu Huang, Gang Huang. A Browser-based Middleware for Service-Oriented Rich Client. Proceedings of 2010 International Conference on Service Science, pp 22-27. May 12-14, Hangzhou, China. (<em>The ONLY WINNER of Best Paper Award</em> ) (EI: 20103013102043) <a href="publications/icss10.pdf">[<span class="pdf"></span>pdf]</a></li>
-        </ul> </li>
-        <li>2009 <ul>
-          <li><em>Qi Zhao</em>, Jiyu Huang, Xiangping Chen, Gang Huang. Feature Interaction Problems in Web-based Service Composition. 10th International Conference on Feature Interactions (ICFI 2009), pp 234-241. June 11-12, Lisbon, Portugal. <a href="publications/icfi09.pdf">[<span class="pdf"></span>pdf]</a></li>
-          <li>Gang Huang, <em>Qi Zhao</em>, Jiyu Huang, Xuanzhe Liu, Teng Teng, Yong Zhang, Honggang Yuan. Towards Service Composition Middleware Embedded in Web Browser. CyberC 2009. (<em>THE ONLY WINNER of Best Paper Award)</em> (EI: 20095312585909) <a href="publications/cyberc09.pdf">[<span class="pdf"></span>pdf]</a></li>
-        </ul> </li>
-        <li>2008 <ul>
-          <li><em>Qi Zhao</em>, Gang Huang, Jiyu Huang, Xuanzhe Liu, Hong Mei, Ying Li, Ying Chen. An On-the-fly Approach to Web-based Service Composition. Proceedings of 2008 IEEE Service Congress and International Conference on Web Services (ICWS 2008), pp 208-209. September, 2008. Beijing, China. (EI: 20092612153676) <a href="publications/icws08.pdf">[<span class="pdf"></span>pdf]</a></li>
-          <li><em>Qi Zhao</em>, Gang Huang, Xuanzhe Liu, Jiyu Huang, Hong Mei. A Web-based Mashup Environment for On-the-fly Service Composition. Fourth International Symposium on Service-Oriented System Engineering (SOSE 2008), pp 32-37. (EI: 20091211969439) <a href="publications/sose08.pdf">[<span class="pdf"></span>pdf]</a></li>
-          <li><em>Qi Zhao</em>, Gang Huang, Xuanzhe Liu, Jiyu Huang. Towards a Component Model for Web-based Service Composition. Journal of Frontiers of Computer Science and Technology. 2008 2 (4): pp 378-388. <a href="publications/jfcst08.pdf">[<span class="pdf"></span>pdf]</a></li>
-        </ul> </li>
+          <li><h4>2010</h4> <ul>
+            <li>Xuanzhe Liu, <em>Qi Zhao</em>, Gang Huang, Zhi Jin, Hong Mei. Assisting End-User Programming for the Service-Oriented Web. 2010 International Conference on Automated Software Engineering (ASE 2010), pp 285-288. Sep. 20-24, Antwerp, Belgium. (EI: 20104913467693) <a href="publications/ase10.pdf">[<span class="pdf"></span>pdf]</a></li>
+            <li><em>Qi Zhao</em>, Xuanzhe Liu, Chen Xingrun, Jiyu Huang. Towards a Data Access Framework for Service-Oriented Rich Clients. 2010 International Conference on Service-Oriented Computing and Applications (SOCA 2010). Dec 13-15, Perth, Australia. <a href="publications/soca10da.pdf">[<span class="pdf"></span>pdf]</a></li>
+            <li>Jiyu Huang, Xuanzhe Liu, <em>Qi Zhao</em>, Jianzhu Ma, Gang Huang. A Browser-based Framework for Data Cache in Web-Delivered Service Composition. 2010 International Conference on Service-Oriented Computing and Applications (SOCA 2010). Dec 13-15, Perth, Australia. <a href="publications/soca10cache.pdf">[<span class="pdf"></span>pdf]</a></li>
+            <li><em>Qi Zhao</em>, Xuanzhe Liu, Dawei Sun, Tiancheng Liu, Ying Li, Gang Huang. Mashing-up Rich User Interfaces for Human-Interaction in WS-BPEL. 2010 International Conference on Web Services (ICWS 2010), pp 559-566. July 5-10, Miami, USA. (EI: 20104013271177) <a href="publications/icws10.pdf">[<span class="pdf"></span>pdf]</a></li>
+            <li><em>Qi Zhao</em>, Xuanzhe Liu, Jiyu Huang, Gang Huang. A Browser-based Middleware for Service-Oriented Rich Client. Proceedings of 2010 International Conference on Service Science, pp 22-27. May 12-14, Hangzhou, China. (<em>The ONLY WINNER of Best Paper Award</em> ) (EI: 20103013102043) <a href="publications/icss10.pdf">[<span class="pdf"></span>pdf]</a></li>
+          </ul> </li>
+          <li><h4>2009</h4> <ul>
+            <li><em>Qi Zhao</em>, Jiyu Huang, Xiangping Chen, Gang Huang. Feature Interaction Problems in Web-based Service Composition. 10th International Conference on Feature Interactions (ICFI 2009), pp 234-241. June 11-12, Lisbon, Portugal. <a href="publications/icfi09.pdf">[<span class="pdf"></span>pdf]</a></li>
+            <li>Gang Huang, <em>Qi Zhao</em>, Jiyu Huang, Xuanzhe Liu, Teng Teng, Yong Zhang, Honggang Yuan. Towards Service Composition Middleware Embedded in Web Browser. CyberC 2009. (<em>THE ONLY WINNER of Best Paper Award)</em> (EI: 20095312585909) <a href="publications/cyberc09.pdf">[<span class="pdf"></span>pdf]</a></li>
+          </ul> </li>
+          <li><h4>2008</h4> <ul>
+            <li><em>Qi Zhao</em>, Gang Huang, Jiyu Huang, Xuanzhe Liu, Hong Mei, Ying Li, Ying Chen. An On-the-fly Approach to Web-based Service Composition. Proceedings of 2008 IEEE Service Congress and International Conference on Web Services (ICWS 2008), pp 208-209. September, 2008. Beijing, China. (EI: 20092612153676) <a href="publications/icws08.pdf">[<span class="pdf"></span>pdf]</a></li>
+            <li><em>Qi Zhao</em>, Gang Huang, Xuanzhe Liu, Jiyu Huang, Hong Mei. A Web-based Mashup Environment for On-the-fly Service Composition. Fourth International Symposium on Service-Oriented System Engineering (SOSE 2008), pp 32-37. (EI: 20091211969439) <a href="publications/sose08.pdf">[<span class="pdf"></span>pdf]</a></li>
+            <li><em>Qi Zhao</em>, Gang Huang, Xuanzhe Liu, Jiyu Huang. Towards a Component Model for Web-based Service Composition. Journal of Frontiers of Computer Science and Technology. 2008 2 (4): pp 378-388. <a href="publications/jfcst08.pdf">[<span class="pdf"></span>pdf]</a></li>
+          </ul> </li>
         </ul>
       </article>
       <article id="Awards">
@@ -253,7 +317,7 @@
         <ul class="dul">
           <li>
             <span class="logo" style="background-position:0px -50px; width:97px; height:53px;"></span>
-            2010.6 - 2011.2, <em>Ph.D. Fellow Visiting Student at IBM China Research Laboratory</em>
+            <h4>2010.6 - 2011.2, Ph.D. Fellow Visiting Student at IBM China Research Laboratory</h4>
             <ul>
               <li>Cloud Platform and Management Team</li>
               <li>Two Cloud Platforms (TSAM and Jomo) Front-end Integration</li>
@@ -261,7 +325,7 @@
           </li>
           <li>
             <span class="logo" style="background-position:0px 0px; width:178px; height:40px;"></span>
-            2007.7 - 2009.2, <em>Software Engineer Intern at <a href="http://www.douban.com/" target="_blank">Douban.com</a></em>
+            <h4>2007.7 - 2009.2, Software Engineer Intern at <a href="http://www.douban.com/" target="_blank">Douban.com</a></h4>
             <ul>
               <li>API Development Team</li>
               <li><a href="http://www.douban.com/service/apidoc/" target="_blank">Douban API</a> Design, Implementation and Documentation</li>
@@ -270,7 +334,7 @@
           </li>
           <li>
             <span class="logo" style="background-position:0px -50px; width:97px; height:53px;"></span>
-            2006.2 - 2007.6, <em>Softrware Engineer Intern at IBM China Research Laboratory</em>
+            <h4>2006.2 - 2007.6, Softrware Engineer Intern at IBM China Research Laboratory</h4>
             <ul>
               <li>Service Offering &amp; Delivery Excellence Team</li>
               <li>Enterprise Mashup Environment Implementation</li>
@@ -283,7 +347,7 @@
         <h3>Open Source Projects</h3>
         <ul class="dul">
           <li>
-            2008.1 - , <em><a href="http://www.wefootball.org" target="_blank">Wefootball.org</a>, Architect & Key Programmer</em>
+            <h4>2008.1 - , <a href="http://www.wefootball.org" target="_blank">Wefootball.org</a>, Architect & Key Programmer</h4>
             <ul>
               <li>Wefootball.org is a Football Social Networking Website (SNS) based on Ruby on Rails</li>
               <li>
@@ -295,7 +359,7 @@
             </ul>
           </li>
           <li>
-            2007.4 - , <em>iMashup Environment, Architect & Key Programmer</em>
+            <h4>2007.4 - , iMashup Environment, Architect & Key Programmer</h4>
             <ul>
               <li>iMashup is an Ajax-based Mashup Tool for Creating Personalized, Web-based and Service-Oriented Mashup Applications in the Way of WYSIWYG (What You See Is What You Get)</li>
               <li>
@@ -308,7 +372,7 @@
             </ul>
           </li>
           <li>
-            2007.9 – 2007.12, <em>Powerpoint and Paper Management Suite, Architect & Key Programmer</em>
+            <h4>2007.9 – 2007.12, Powerpoint and Paper Management Suite, Architect & Key Programmer</h4>
             <ul>
               <li>Multiple Users Paper and PPT Management Systems based on Ruby on Rails</li>
               <li>Used in Institute of Molecular Medicine, Peking University</li>
@@ -321,7 +385,7 @@
             </ul>
           </li>
           <li>
-            2006.1 – 2006.7, <em>Worldlog Website, Architect & Key Programmer</em>
+            <h4>2006.1 – 2006.7, Worldlog Website, Architect & Key Programmer</h4>
             <ul>
               <li>Worldlog is a Rich Client Geo-Location Markup Web Application based on PHP</li>
               <li>
@@ -356,70 +420,5 @@
         <object width="480" height="390"><param name="movie" value="http://www.youtube-nocookie.com/v/Ehn-69PEiUE?fs=1&amp;hl=zh_CN&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube-nocookie.com/v/Ehn-69PEiUE?fs=1&amp;hl=zh_CN&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="390"></embed></object>
       </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script src="jquery.colorbox-min.js"></script>
-    <script>
-      $(document).ready(function(){
-
-        //menu
-        var nav = $("#topNav");
-        showsection = function(id){
-          var tl = $("#topNav>ul>li>a").map(function(i, e){
-            return '#'+$(e).text();
-          })
-          tl.each(function(i,v){$(v).hide()});
-          nav.find("li>ul").hide();
-
-          if (id==null || id=="" || id=="#") id=tl[0];
-
-          if ($.inArray(id, tl)!=-1) $(id).show(); 
-          else {
-            var e = $(nav.find("li>ul>li>a[href='"+id+"']")[0])
-            $(e.parent().parent().prev().attr("href")).show();
-            window.location = String(window.location).replace(/\#.*$/, "") + id;
-          }
-        }
-        nav.find("li").each(function() {
-          if ($(this).find("ul").length > 0) {
-              $(this).mouseenter(function() {
-                $(this).find("ul").show();
-              });
-              $(this).mouseleave(function() {
-                $(this).find("ul").hide();
-              });
-            }
-          });
-
-        //anchor
-        // the hashchange event not supported in ie6,7 and ie8 with compatibility view
-        // the back button breakdown in these browsers.
-        if ($.browser.msie && 
-             ($.browser.version < 8 || 
-             (document.documentMode !== undefined && document.documentMode < 8))) {
-             nav.find("li>a").click(function(){
-               showsection($(this).attr('href'));
-             })
-             $("a.inlineNav").click(function(){
-               showsection($(this).attr('href'));
-             })
-        }
-        else $(window).bind("hashchange", function(){
-          showsection(window.location.hash);
-        });
-        
-        //zoom
-        $("a.pic_zoom").colorbox({opacity:0.7});
-        $("a.video_zoom").each(function(i,v){
-          var e = $(v); 
-          e.attr("target", ''); 
-          e.attr('href', e.attr('rel'));
-          e.attr('rel', '');
-        }); 
-        $("a.video_zoom").colorbox({inline:true,opacity:0.7});
-
-        //init
-        showsection(window.location.hash);
-      });
-    </script>
   </body>
 </html>

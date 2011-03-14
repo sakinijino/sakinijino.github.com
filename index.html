@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Qi Zhao (sakinijino)</title>
+    <link media="screen" rel="stylesheet" href="colorbox.css" />
     <style>
       body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}
 
-      body {padding: 20px; background: #e2e6e9; font: normal 14px Verdana, Arial, Sans-Serif; text-align: left; }
+      body {background: #e2e6e9; font: normal 14px Verdana, Arial, Sans-Serif; text-align: left; }
       p { padding: 0 0 0 20px; line-height:1.8em;}
       em {font-weight:bold; font-style:italic;}
       ul, ol { padding: 0 0 0 40px;}
@@ -15,143 +16,142 @@
       /* dul double stage ul */
       ul.dul>li { margin-bottom: 15px;}
       ul.dul ul { list-style-type: square}
+      div.cl {clear:both;}
 
-      nav { display:block; margin:0 auto 20px; border:1px solid #222; position:relative; background-color:#6a6a6a; font-size:16px; }
+      div#container { max-width:920px; margin: 15px auto; }
+
+      nav { display:block; margin:0 auto 10px; border:1px solid #222; position:relative; background-color:#6a6a6a; font-size:16px; }
       nav ul { padding:0; margin:0; }
       nav li { position:relative; float:left; list-style-type:none; }
       nav ul:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
       nav li a { display:block; padding:5px 25px; border-left:1px solid #999; border-right:1px solid #222; color:#eee; text-decoration:none; }
       nav li:first-child a { border-left:none; }
-      nav li.last a { border-right:none; }
       nav ul ul { display:none; width:100%; position:absolute; left:0; background:#6a6a6a; }
       nav ul ul li { float:none; }
       nav ul ul a { padding:5px 10px; border-left:none; border-right:none; font-size:14px; }
       nav ul ul a:hover { background-color:#555; }
 
-      section {display: block; background: #fff; padding: 5px 20px; margin:10px auto;}
+      section {clear:both; display: block; background: #fff; padding: 5px 20px; margin:10px auto;}
       section article { display:block; margin-bottom: 25px; padding-bottom: 15px; border-bottom:1px solid #999;}
       section article h3 {font-size:20px; text-transform: uppercase; margin: 20px 0 10px;}
       section article h4 {margin: 20px 0 5px; }
       section a:link, section a:visited, #post_content a:link, #post_content a:visited { color: #336699;}
       section a:hover, section a:active, #post_content a:hover, #post_content a:active { color: #fff; background-color: #999;}
 
-      div.zoom {display: none; }
-      div#zoom h4 { margin:0 0 10px;}
+      div#video_zoom {display: none; }
+      div#colorbox h4 { margin:0 0 10px;}
+      div#cboxLoadedContent {padding: 5px 10px;}
 
       #Summary span.lang { float:left; display:block; width:48px; height:48px; margin:2px 5px; background: url("images/icons.png") no-repeat scroll 0 0 transparent}
       #Summary #avatar { float: right; margin: 0 50px 0 0;}
-      #lang:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+      #Summary #lang:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
 
       #Links ul {margin: 0px 10px; padding: 0px;}
-      #Links ul li {margin:0 5px; padding: 5px; list-style-type:none; float:left; width:140px;}
       #Links ul:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+      #Links ul li {margin:0 5px; padding: 5px; list-style-type:none; float:left; width:140px;}
       #Links ul li span.link{float:left; display:block; width:48px; height:48px; margin:2px 5px; background: url("images/icons.png") no-repeat scroll 0 0 transparent}
       #Links a {line-height:60px;}
 
       #RPublications ul li a span.pdf {display:block-inline; width:16px; height:16px; background: url("images/icons.png") no-repeat scroll -58px 0 transparent; padding-left: 20px; }
 
-      #Experience ul li span.logo {float:right; display:block; margin: 0 40px 0 20px; background: url("images/logos.png") no-repeat scroll 0 0 transparent}
+      #Experience ul li span.logo {float:right; display:block; margin: 10px 40px 0 20px; background: url("images/logos.png") no-repeat scroll 0 0 transparent}
     </style>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22023987-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
+     </script>
   </head>
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-22023987-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-     })();
-
-   </script>
   <body>
+    <div id="container">
+    <!--[if lt IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]--> 
     <header>
       <nav id="topNav">
         <ul>
           <li>
-            <a href="#B">Basic</a>
+            <a href="#Basic">Basic</a>
             <ul>
               <li><a href="#Summary">Summary</a></li>
               <li><a href="#Links">Links</a></li>
-              <li><a href="#Education">Education</a></li>
-              <li><a href="#Awards">Awards</a></li>
             </ul>
           </li>
           <li>
-            <a href="#R">Research</a>
+            <a href="#Research">Research</a>
             <ul>
+              <li><a href="#Education">Education</a></li>
               <li><a href="#Interests">Interests</a></li>
-              <li><a href="#IProjects">Projects</a></li>
+              <li><a href="#RProjects">Projects</a></li>
               <li><a href="#RPublications">Publications</a></li>
+              <li><a href="#Awards">Awards</a></li>
+              <li><a href="#RActivities">Activities</a></li>
             </ul>
           </li>
           <li>
-            <a href="#I">Industry</a>
+            <a href="#Industry">Industry</a>
             <ul>
               <li><a href="#Skills">Skills</a></li>
               <li><a href="#Experience">Experience</a></li>
               <li><a href="#IProjects">Open Source</a></li>
               <li><a href="#IPublications">Publications</a></li>
+              <li><a href="#IActivities">Activities</a></li>
             </ul>
           </li>
         </ul>
+        <!--[if lt IE 8]><div class="cl"></div><![endif]-->
       </nav>
     </header>
     <section id="Basic">
       <article id="Summary">
         <img id="avatar" src="images/avatar.jpg"></img>
-        <h3>Zhao Qi (赵 祺)</h3>
+        <h3>Qi Zhao (赵 祺)</h3>
         <p>
         Ph.D. Candidate<br/>
         <a href="http://www.sei.pku.edu.cn/" target="_blank">Institute of Software</a><br/>
         School of Electronics Engineering and Computer Science<br/>
         <a href="http://www.pku.edu.cn/" target="_blank">Peking University</a>, Beijing, 100871, China<br/><br/>
-        Email (GTalk): sakinijino(at)gmail.com<br/>
+        Email (GTalk): sakinijino(at)gmail.com
         </p>
         <h4>Language</h4>
         <p id="lang">
         <span class="lang" style="background-position: 0px -580px;" title="Chinese"></span>
         <span class="lang" style="background-position: 0px -638px;" title="English"></span>
         </p>
+        <!--[if lt IE 8]><div class="cl"></div><![endif]-->
         <h4>Interests</h4>
         <p>
         <a href="http://sakinijino.com/category/book" target="_blank">Reading</a>, <a href="http://sakinijino.com/category/writing" target="_blank">Writing</a>, <a href="http://www.wefootball.org/" target="_blank">Football</a>
         </p> 
+        <h4>More Infomation - [<a href="#Research" class="inlineNav">Research</a>] [<a href="#Industry" class="inlineNav">Industry</a>]</h4>
       </article>
       <article id="Links">
         <h3>Links</h3>
         <ul>
-          <li>
-            <a href="http://sakinijino.com" target="_blank"><span class="link" style="background-position: 0px -522px;"></span>Blog</a>
-          </li>
-          <li>
-            <a href="http://twitter.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -348px;"></span>Twitter</a>
-          </li>
-          <li>
-            <a href="http://www.douban.com/people/sakinijino/" target="_blank"><span class="link" style="background-position: 0px 0px;"></span>Douban</a>
-          </li>
-          <li>
-            <a href="http://t.sina.com.cn/sakinijino" target="_blank"><span class="link" style="background-position: 0px -290px;"></span>T.Sina</a>
-          </li>
-          <li>
-            <a href="http://cn.linkedin.com/pub/qi-zhao/17/1b/961" target="_blank"><span class="link" style="background-position: 0px -232px;"></span>LinkedIn</a>
-          </li>
-          <li>
-            <a href="http://www.facebook.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -116px;"></span>Facebook</a>
-          </li>
-          <li>
-            <a href="http://github.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -406px;"></span>Github</a>
-          </li>
-          <li>
-            <a href="http://wefootball.org" target="_blank"><span class="link" style="background-position: 0px -464px;"></span>Wefootball</a>
-          </li>
+          <li><a href="http://sakinijino.com" target="_blank"><span class="link" style="background-position: 0px -522px;"></span>Blog</a></li>
+          <li><a href="http://twitter.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -348px;"></span>Twitter</a></li>
+          <li><a href="https://profiles.google.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -754px;"></span>GProfile</a></li>
+          <li><a href="http://www.facebook.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -116px;"></span>Facebook</a></li>
+          <li><a href="http://cn.linkedin.com/pub/qi-zhao/17/1b/961" target="_blank"><span class="link" style="background-position: 0px -232px;"></span>LinkedIn</a></li>
+          <li><a href="http://www.douban.com/people/sakinijino/" target="_blank"><span class="link" style="background-position: 0px 0px;"></span>Douban</a></li>
+          <li><a href="http://t.sina.com.cn/sakinijino" target="_blank"><span class="link" style="background-position: 0px -290px;"></span>T.Sina</a></li>
+          <li><a href="http://www.kaixin001.com/home/?uid=111242" target="_blank"><span class="link" style="background-position: 0px -812px;"></span>Kaixin</a></li>
+          <li><a href="http://www.renren.com/profile.do?id=240549301" target="_blank"><span class="link" style="background-position: 0px -870px;"></span>Renren</a></li>
+          <li><a href="http://wefootball.org" target="_blank"><span class="link" style="background-position: 0px -464px;"></span>Wefootball</a></li>
+          <li><a href="http://github.com/sakinijino" target="_blank"><span class="link" style="background-position: 0px -406px;"></span>Github</a></li>
         </ul> 
+        <!--[if lt IE 8]><div class="cl"></div><![endif]-->
       </article>
+    </section>
+    <section id="Research">
       <article id="Education">
         <h3>Education</h3>
         <ul>
@@ -165,16 +165,6 @@
           </li>
         </ul>
       </article>
-      <article id="Awards">
-        <h3>Awards and Honors</h3>
-        <ul>
-          <li>IBM Global Ph.D. Fellowship Awards, 2010 (<em>one of the 8 winners in China</em>, 2010)</li>
-          <li>Tri-A Student of Peking University, 2009</li>
-          <li>Tri-A Student of Peking University, 2005</li>
-        </ul>
-      </article>
-    </section>
-    <section id="Research">
       <article id="Interests">
         <h3>Research Interests</h3>
         <ul>
@@ -198,7 +188,13 @@
             2006.9 - , <em>Enterprise Mashup Environment</em>
             <ul>
               <li>Proposed the component and composition model of mashup infrastructure, designed an on-the-fly mashup approach</li>
-              <li>Implemented an enterprise mashup tool, iMashup. (<a href="http://imashup.sakinijino.com" target="_blank">Online Demo</a> | Video Demos (<a href="#imashup_youtube" class="zoom">Youtube</a>, <a href="#imashup_youku" class="zoom">Youku</a>) | <a href="https://github.com/sakinijino/imashup" target="_blank">Source Code</a>)</li>
+              <li>Implemented an enterprise mashup tool, iMashup. <br/>
+                (<a href="http://imashup.sakinijino.com" target="_blank">Online Demo</a> | 
+                <a href="images/mim.jpg" title="iMashup - Homepage" class="pic_zoom" >Screen Casts</a> | 
+                Video Demos (<a href="http://www.youtube.com/watch?v=Ehn-69PEiUE" target="_blank" rel="#imashup_youtube" class="video_zoom">Youtube</a>, 
+                <a href="http://v.youku.com/v_show/id_XMjM3ODIxMTQ4.html" target="_blank" rel="#imashup_youku" class="video_zoom">Youku</a>) | 
+                <a href="https://github.com/sakinijino/imashup" target="_blank">Source Code</a>)
+              </li>
               <li>Published 3 papers.</li>
             </ul>
           </li>
@@ -223,6 +219,23 @@
           <li><em>Qi Zhao</em>, Gang Huang, Xuanzhe Liu, Jiyu Huang. Towards a Component Model for Web-based Service Composition. Journal of Frontiers of Computer Science and Technology. 2008 2 (4): pp 378-388. <a href="publications/jfcst08.pdf">[<span class="pdf"></span>pdf]</a></li>
         </ul> </li>
         </ul>
+      </article>
+      <article id="Awards">
+        <h3>Awards and Honors</h3>
+        <ul>
+          <li>IBM Global Ph.D. Fellowship Awards, 2010 (<em>one of the 8 winners in China</em>, 2010)</li>
+          <li>Tri-A Student of Peking University, 2009</li>
+          <li>Tri-A Student of Peking University, 2005</li>
+        </ul>
+      </article>
+      <article id="RActivities">
+        <h3>Research Activities</h3>
+        <ul>
+          <li>Teaching Assistant of <a href="http://sei.pku.edu.cn/~huanggang/" target="_blank">Prof. Gang Huang</a>, Undergraduate Program, "Introduction to Computing", Autumn 2008.</li>
+          <li>Teaching Assistant of Graduate Program, "Service-Oriented Architecture" (Taught by IBM China Research Lab), Spring 2007.</li>
+          <li>Student Volunteer of the 7th. IEEE International Conference on Web Services (ICWS 2008), 2008.9 .</li>
+          <li>External Reviewer of ICWS 2009, ICWE 2009, ICSS 2010, SOSE 2010, Middleware 2010.</li>
+        </ul> 
       </article>
     </section>
     <section id="Industry">
@@ -272,14 +285,25 @@
             2008.1 - , <em><a href="http://www.wefootball.org" target="_blank">Wefootball.org</a>, Architect & Key Programmer</em>
             <ul>
               <li>Wefootball.org is a Football Social Networking Website (SNS) based on Ruby on Rails</li>
-              <li><a href="http://www.wefootball.org" target="_blank">Online Site</a> | <a href="https://github.com/sakinijino/wefootball" target="_blank">Source Code</a></li>
+              <li>
+                <a href="http://www.wefootball.org" target="_blank">Online Site</a> | 
+                <a href="images/mwf1.jpg" title="Wefootball - Formation Setting" class="pic_zoom" rel="wf">Screen Casts</a>
+                <a href="images/mwf2.jpg" title="Wefootball - Activities" class="pic_zoom" rel="wf"></a> | 
+                <a href="https://github.com/sakinijino/wefootball" target="_blank">Source Code</a>
+              </li>
             </ul>
           </li>
           <li>
             2007.4 - , <em>iMashup Environment, Architect & Key Programmer</em>
             <ul>
               <li>iMashup in a Javascript-based Mashup Tool for Creating Personalized, Web-based and Service-Oriented Mashup Applications in the Way of WYSIWYG (What You See Is What You Get)</li>
-              <li><a href="http://imashup.sakinijino.com" target="_blank">Online Demo</a> | Video Demos (<a href="#imashup_youtube" class="zoom">Youtube</a>, <a href="#imashup_youku" class="zoom">Youku</a>) | <a href="https://github.com/sakinijino/imashup" target="_blank">Source Code</a></li>
+              <li>
+                <a href="http://imashup.sakinijino.com" target="_blank">Online Demo</a> |
+                <a href="images/mim.jpg" title="iMashup - Homepage" class="pic_zoom" >Screen Casts</a> | 
+                Video Demos (<a href="http://www.youtube.com/watch?v=Ehn-69PEiUE" target="_blank" rel="#imashup_youtube" class="video_zoom">Youtube</a>, 
+                <a href="http://v.youku.com/v_show/id_XMjM3ODIxMTQ4.html" target="_blank" rel="#imashup_youku" class="video_zoom">Youku</a>) | 
+                <a href="https://github.com/sakinijino/imashup" target="_blank">Source Code</a>
+              </li>
             </ul>
           </li>
           <li>
@@ -287,49 +311,73 @@
             <ul>
               <li>Powerpoint and Paper Management Suite includes the Ruby on Rails based Multiple Users Paper and PPT Management Systems</li>
               <li>Used in Institute of Molecular Medicine, Peking University</li>
-              <li>Source Code (<a href="https://github.com/sakinijino/Speech-Management-System" target="_blank">PPT Management System</a>, <a href="https://github.com/sakinijino/Paper-Management-System" target="_blank">Paper Management System</a>)</li>
+              <li>
+                <a href="images/msms.jpg" title="PPT Detail" class="pic_zoom" rel="spms">Screen Casts</a>
+                <a href="images/mpms.jpg" title="Paper Detail" class="pic_zoom" rel="spms"></a>| 
+                Source Code (<a href="https://github.com/sakinijino/Speech-Management-System" target="_blank">PPT Management System</a>, 
+                <a href="https://github.com/sakinijino/Paper-Management-System" target="_blank">Paper Management System</a>)
+              </li>
             </ul>
           </li>
           <li>
             2006.1 – 2006.7, <em>Worldlog Website, Architect & Key Programmer</em>
             <ul>
               <li>Worldlog is a PHP based Rich Client Geo-Location Markup Web Application</li>
-              <li><a href="https://github.com/sakinijino/worldlog" target="_blank">Source Code</a></li>
+              <li>
+                <a href="images/mwl.jpg" title="Worldlog - Homepage" class="pic_zoom" >Screen Casts</a> | 
+                <a href="https://github.com/sakinijino/worldlog" target="_blank">Source Code</a>
+              </li>
             </ul>
           </li>
         </ul>
       </article>
       <article id="IPublications">
-        <h3>Translations</h3>
+        <h3>Industrial Publications</h3>
         <ul>
-          <li>Jiakuan Ma, <em>Qi Zhao</em>, Shen Liu (2010). <a href="http://www.amazon.cn/Rails%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C-%E6%8B%89%E7%91%9E%E7%89%B9-Simon-St-Laurent/dp/B0031U0AEC/" target="_blank"><i>Learning Rails (Rails学习手册)</i></a>. China Machine Press, China. (7 of the 19 chapters)</li>
+          <li>Simon, L., & Edd D. (2010). <a href="http://www.amazon.cn/Rails%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C-%E6%8B%89%E7%91%9E%E7%89%B9-Simon-St-Laurent/dp/B0031U0AEC/" target="_blank"><i>Learning Rails (Rails学习手册)</i></a> (Jiakuan Ma, <em>Qi Zhao</em>, Shen Liu, Trans.). China Machine Press, China. (<em>Qi Zhao Translated 7 of the 19 chapters</em>)</li>
         </ul>
       </article>
+      <article id="IActivities">
+        <h3>Industrial Activities</h3>
+        <ul>
+          <li>Ruby News and Articles Translation for <a href="http://www.infoq.com/cn/ruby/" target="_blank">InfoQ China</a>, 2007.12 - 2008.8.</li>
+        </ul> 
+      </article>
     </section>
-    <div id="imashup_youku" class="zoom"> 
-      <h4><a href="http://v.youku.com/v_show/id_XMjM3ODIxMTQ4.html" target="_blank">iMashup Youku Video</a></h4>
-      <embed src="http://player.youku.com/player.php/sid/XMjM3ODIxMTQ4/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed>
-    </div>
-    <div id="imashup_youtube" class="zoom">
-      <h4><a href="http://www.youtube.com/watch?v=Ehn-69PEiUE" target="_blank">iMashup Youtube Video</a></h4>
-      <object width="480" height="390"><param name="movie" value="http://www.youtube-nocookie.com/v/Ehn-69PEiUE?fs=1&amp;hl=zh_CN"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube-nocookie.com/v/Ehn-69PEiUE?fs=1&amp;hl=zh_CN" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="390"></embed></object>
+    <div>
+    <div id="video_zoom">
+      <div id="imashup_youku"> 
+        <h4><a href="http://v.youku.com/v_show/id_XMjM3ODIxMTQ4.html" target="_blank">iMashup Youku Video (Click Here If Cannot See the Video)</a></h4>
+        <embed src="http://player.youku.com/player.php/sid/XMjM3ODIxMTQ4/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed>
+      </div>
+      <div id="imashup_youtube">
+        <h4><a href="http://www.youtube.com/watch?v=Ehn-69PEiUE" target="_blank">iMashup Youtube Video (Click Here If Cannot See the Video)</a></h4>
+        <object width="480" height="390"><param name="movie" value="http://www.youtube-nocookie.com/v/Ehn-69PEiUE?fs=1&amp;hl=zh_CN&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube-nocookie.com/v/Ehn-69PEiUE?fs=1&amp;hl=zh_CN&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="390"></embed></object>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script src="fancyzoom.min.js"></script>
+    <script src="jquery.colorbox-min.js"></script>
     <script>
-      (function($){
+      $(document).ready(function(){
 
-        //cache nav
+        //menu
         var nav = $("#topNav");
-        var navlist = $("#topNav>ul>li>a").map(function(i, e){return $(e).text()})
+        showsection = function(id){
+          var tl = $("#topNav>ul>li>a").map(function(i, e){
+            return '#'+$(e).text();
+          })
+          tl.each(function(i,v){$(v).hide()});
+          nav.find("li>ul").hide();
 
-        var showone = function(id){
-          navlist.each(function(i, v){$('#'+v).hide()});
-          if (id==null) id=navlist[0];
-          $('#'+id).show();
+          if (id==null || id=="" || id=="#") id=tl[0];
+
+          if ($.inArray(id, tl)!=-1) $(id).show(); 
+          else {
+            var e = $(nav.find("li>ul>li>a[href='"+id+"']")[0])
+            $(e.parent().parent().prev().attr("href")).show();
+            window.location = String(window.location).replace(/\#.*$/, "") + id;
+          }
         }
-
-        //add indicators and hovers to submenu parents
         nav.find("li").each(function() {
           if ($(this).find("ul").length > 0) {
               $(this).mouseenter(function() {
@@ -338,23 +386,39 @@
               $(this).mouseleave(function() {
                 $(this).find("ul").hide();
               });
-              $(this).click(function() {
-                $(this).find("ul").hide()
-                showone($(this).find("a").first().text());
-              });
             }
           });
 
-        $("#topNav>ul>li>ul>li>a").each(function(){
-          var e = $(this);
-          e.click(function(){e.parent().parent().prev().click()});
+        //anchor
+        // the hashchange event not supported in ie6,7 and ie8 with compatibility view
+        // the back button breakdown in these browsers.
+        if ($.browser.msie && 
+             ($.browser.version < 8 || 
+             (document.documentMode !== undefined && document.documentMode < 8))) {
+             nav.find("li>a").click(function(){
+               showsection($(this).attr('href'));
+             })
+             $("a.inlineNav").click(function(){
+               showsection($(this).attr('href'));
+             })
+        }
+        else $(window).bind("hashchange", function(){
+          showsection(window.location.hash);
         });
+        
+        //zoom
+        $("a.pic_zoom").colorbox({opacity:0.7});
+        $("a.video_zoom").each(function(i,v){
+          var e = $(v); 
+          e.attr("target", ''); 
+          e.attr('href', e.attr('rel'));
+          e.attr('rel', '');
+        }); 
+        $("a.video_zoom").colorbox({inline:true,opacity:0.7});
 
-        $("a.zoom").fancyZoom(); 
-
-        showone();
-        nav.find("li>a[href='"+window.location.hash+"']").click();
-      })(jQuery);
+        //init
+        showsection(window.location.hash);
+      });
     </script>
   </body>
 </html>

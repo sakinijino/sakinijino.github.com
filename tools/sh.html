@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+	<title>Online Syntax Highlighter</title>
+  <style>
+    body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}
+    body {background: #e2e6e9; font: normal 14px Verdana, Arial, Sans-Serif; text-align: left; }
+    h1 {margin:10px 0 0; font-size: 16px;}
+    h2 {margin-bottom:13px;}
+    div#container {width: 920px; clear:both; display: block; background: #fff; padding: 5px 20px; margin:15px auto;}
+
+    div#input div, div#output {border: solid #E6E4E4 1px; }
+    div#input, div#output, div#footer { margin: 15px 0;}
+    div#footer { margin: 50px 0 15px;}
+    div#input div{padding: 10px;}
+    div#input div.cl { margin:0; padding: 0; visibility: hidden; border: none; clear:both;}
+    div#input span.label { color: #5B5C5C; font-weight: bold;}
+
+    div#code {float: left; width:620px;} 
+    div#options { width: 240px; float: right; background-color: #F3F2F2;}
+
+    div#code textarea { width: 600px;display: block; margin:0 0 8px;} 
+    div#code select {padding:1px 0;}
+    div#code input, div#code textarea { padding: 1px 6px;}
+  </style>
+  <link href="http://alexgorbatchev.com/pub/sh/current/styles/shCoreDefault.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script>
+  <script src="http://alexgorbatchev.com/pub/sh/current/scripts/shAutoloader.js" type="text/javascript"></script>
+</head>
+<body>
+  <div id="container">
+    <h1>Online Syntax Highlighter</h1>
+    <div id="input">
+      <div id="code">
+        <h2>Code</h2>
+        <textarea id="textarea" rows="15"></textarea>
+        <span class="label">Type:</span>
+        <select id="syntax"></select>
+        <input type="button" id="highlight" value="Syntax Highlight!">
+      </div>
+      <div id="options">
+        <h2>Advanced Options</h2>
+        <span class="label">Line Number:</span>
+        <input type="checkbox" id="gt" checked><br/><br/>
+        <span class="label">Highlight Lines:</span>
+        <input type="input" id="hl" size="10"> (e.g. [1,2,6])
+      </div>
+      <div class="cl"></div>
+    </div>
+    <div id="output" style="display:none">
+    </div>
+    <div id="footer">
+      Author: <a href="http://qizhao.sakinijino.com/">Qi Zhao</a>. This tool uses <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a>.
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $("#highlight").click(function(){
+          $("div#output").show().empty().append("<pre>"+$("#textarea").val()+"</pre>");
+          var klass = "brush: "+$("#syntax option:selected").text();
+          if (!$("div#options #gt").attr("checked")) klass += "; gutter: false";
+          if ($.trim($("div#options #hl").val()) != "") klass += "; highlight: "+$("div#options #hl").val();
+          $("div#output pre").addClass(klass);
+          highlightall();
+          $("div#input").data("smarthide")();
+        })
+        
+        $("div#input").data("smarthide", function (){
+          $("div#input #options h2, div#input #code h2").hide();
+          $("div#input #textarea").show().attr("rows", "2").bind("click", $("div#input").data("smartshow"));
+        });
+
+        $("#input").data("smartshow", function (){
+          $("div#input *").show();
+          $("div#input #textarea").attr("rows", "15").unbind("click", $("div#input").data("smartshow"));
+        });
+
+        var brushes = [
+          'applescript            @shBrushAppleScript.js',
+          'as3                    @shBrushAS3.js',
+          'shell                  @shBrushBash.js',
+          'coldfusion             @shBrushColdFusion.js',
+          'cpp                    @shBrushCpp.js',
+          'c#                     @shBrushCSharp.js',
+          'css                    @shBrushCss.js',
+          'delphi                 @shBrushDelphi.js',
+          'diff                   @shBrushDiff.js',
+          'erlang                 @shBrushErlang.js',
+          'groovy                 @shBrushGroovy.js',
+          'html                   @shBrushXml.js',
+          'java                   @shBrushJava.js',
+          'javafx                 @shBrushJavaFX.js',
+          'javascript             @shBrushJScript.js',
+          'perl                   @shBrushPerl.js',
+          'php                    @shBrushPhp.js',
+          'plain                  @shBrushPlain.js',
+          'python                 @shBrushPython.js',
+          'ruby                   @shBrushRuby.js',
+          'sass                   @shBrushSass.js',
+          'scala                  @shBrushScala.js',
+          'sql                    @shBrushSql.js',
+          'vb                     @shBrushVb.js',
+          'xml                    @shBrushXml.js'
+        ];
+
+        for (var i=0; i<brushes.length; ++i) {
+          var syn = brushes[i].split(/\s+/)[0]
+          $("#syntax").append("<option>"+syn+"</option>");
+        }
+
+        var highlightall = (function(){
+          var result = [];
+          for(var i = 0; i < brushes.length; i++)
+            result.push(brushes[i].replace('@', "http://alexgorbatchev.com/pub/sh/current/scripts/"));
+          return function () {
+            SyntaxHighlighter.vars.discoveredBrushes = null;
+            SyntaxHighlighter.autoloader.apply(SyntaxHighlighter, result);
+            SyntaxHighlighter.all();
+          };
+        })()
+    })
+  </script>
+</body>
+</html>

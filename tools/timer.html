@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+	<title>Online Timer</title>
+  <style>
+    body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}
+    body {background: #e2e6e9; font: normal 14px Verdana, Arial, Sans-Serif; text-align: left; }
+    h1 {font-size: 150px;}
+    button {padding:10px; font-size: 32px;}
+    div#container, div#control {display: block; margin:30px auto;}
+    div#container{width: 760px;}
+    div#control {width: 300px;}
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="container">
+    <h1 id="time"></h1>
+  </div>
+  <div id="control">
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+  </div>
+  <script type="text/javascript">
+    var Timer = function(){
+      this.reset();
+    }
+    Timer.prototype.ins = function(){
+      this.s++;
+      if (this.s >= 60) {
+        this.m++; this.s-=60;
+      }
+      if (this.m >= 60) {
+        this.h++; this.m-=60;
+      }
+    }
+    Timer.prototype.to_s = function(){
+      var az = function(n) { if (n>=10) return n.toString(); else return "0"+n.toString();}
+      return az(this.h)+":"+az(this.m)+":"+az(this.s);
+    }
+    Timer.prototype.reset = function(cb){
+      this.stop();
+      this.s = 0;
+      this.m = 0;
+      this.h = 0;
+      this.cb = null;
+      this.running = false;
+      if (cb!=null) cb.call(null, this);
+    }
+    Timer.prototype.start = function(cb){
+      if (this.running) return;
+      this.running = true;
+      var _this = this;
+      this.cb = setInterval(function(){
+        _this.ins();
+        if (cb!=null) cb.call(null, _this);
+      }, 1000);
+    }
+    Timer.prototype.stop = function(){
+      this.running = false;
+      clearInterval(this.cb); 
+    }
+    $(document).ready(function() {
+        timer = new Timer();
+        $("#time").text(timer.to_s());
+        $("#start").click(function(){
+          timer.start(function(t){$("#time").text(t.to_s());})
+        });
+        $("#stop").click(function(){timer.stop()});
+        $("#reset").click(function(){
+          timer.reset(function(t){$("#time").text(t.to_s());})
+        });
+    })
+  </script>
+</body>
+</html>

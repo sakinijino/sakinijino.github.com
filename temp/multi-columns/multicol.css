@@ -1,0 +1,20 @@
+
+.Article {	
+	column-count: 12;
+	column-gap: 20px;
+	column-rule: 1px dotted #BBB;
+	background-color: #FFFFFF;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;	
+	padding: 8px;
+	text-align: justify;
+ 	
+}
+
+.Article2 {
+	column-count:2;
+}
+
+.Article3 {
+	column-count:3;
+}

@@ -1,0 +1,130 @@
+body {
+	background-color: #F4F4F4;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	margin: 0;
+	padding: 0;
+	font-size: 62.5%; /* Resets 1em to 10px */
+}
+#splash {
+	width: 37em;
+	margin: 4em auto 0 auto;
+	text-align: left;
+	font-size: 1.45em;
+}
+#splash .logo {
+	text-align: center;
+}
+#Content {
+	margin: 0.5em 2em;
+	width: 850px;
+	font-size: 1.45em;
+}
+code {
+	font-size: 1em;
+	font-family: "Courier New", Courier, mono;
+	margin: 1em 0;
+}
+a img {
+	border: none;
+}
+ul {
+	margin: 0 0 0 1em;
+	padding: 0;
+}
+li {
+	margin: 1em 0;
+}
+a {
+	color: #993333;	
+	text-decoration: none;
+}
+a:hover {
+	color: #FF3333;	
+	text-decoration: underline;
+}
+
+table {
+	margin-top: 1em;
+	border-collapse: collapse;
+}
+th {
+	text-align: left;
+	padding: 2px;
+}
+td {
+	text-align: left;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	padding: 2px;
+}
+#debugOutput {
+  border-bottom: 1px solid #aaaaaa;
+  padding: 0 0 10px;
+}
+
+#debugOutput table, #debugOutput table td {
+	 border: 1px dotted #aaa;
+	 border-collapse: collapse;
+	 padding: 3px;
+}
+
+
+/* Monobook / MediaWiki css */
+div.thumb {
+    margin-bottom: 0.5em;
+    border-style: solid; border-color: White;
+    width: auto;
+}
+div.thumb div {
+    border:1px solid #cccccc;
+    padding: 3px !important;
+    background-color:#f9f9f9;
+    font-size: 94%;
+    text-align: center;
+    overflow: hidden;
+}
+div.thumb div a img {
+    border:1px solid #cccccc;
+}
+div.thumb div div.thumbcaption {
+    border: none;
+    text-align: left;
+    line-height: 1.4em;
+    padding: 0.3em 0 0.1em 0;
+}
+div.magnify {
+    float: right;
+    border: none !important;
+    background: none !important;
+}
+div.magnify a, div.magnify img {
+    display: block;
+    border: none !important;
+    background: none !important;
+}
+div.tright {
+    clear: right;
+    float: right;
+    border-width: 0.5em 0 0.8em 1.4em;
+}
+div.tleft {
+    float: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: Black;
+    background: none;
+    margin: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.17em;
+    border-bottom: 1px solid #aaaaaa;
+	text-align: left;
+}
+h1 { 
+	font-size: 128%; 
+	padding-top: 0 !important;
+}
+h2 {
+	padding-top: 2em !important; 
+	font-size: 110%; 
+}

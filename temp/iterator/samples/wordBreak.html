@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Word Break</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}
+      body {background: #e2e6e9; font: normal 14px Verdana, Arial, Sans-Serif; text-align: left; }
+      p { padding: 0 20px; margin: 8px 0; line-height:20px; font-family:Courier New;}
+      em {font-weight:bold; font-style:italic;}
+      ul, ol { padding: 0 0 0 40px;}
+      ul, ol { line-height: 1.8em; color: #333333;}
+      ul { list-style-type: circle }
+
+      div { max-width:920px; margin: 15px auto; background: #fff; }
+      div p {width:75%}
+      div button {margin: 20px 0 20px 20px; padding: 5px}
+    </style>
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../iterator.js"></script>
+    <script type="text/javascript">
+      $(window).load(function() {
+          $('button#wb').click(function(){
+            text_break();
+            $('#source').hide();
+            $('#container').append('<button>Undo</button>')
+            $('#container button:last').click(function(){
+              $('#container').html('');
+              $('#source').show();
+            })
+          })
+      });
+
+      function text_break() {
+          var i = $('#source > *:not(button)').iterator();
+          var block = new $.Block($('#container'));
+          
+          var inAWord = false;
+          var pattern = new RegExp(/\w/);
+          var startHeight = 0;
+          var reverse = 2;
+          var minWordLength = 4;
+          var splitWord = $(document.createElement('span')).css('color', '#fff').css('background-color', '#f00');
+          while (!i.isEnd()) {
+            var op = i.next()[0];
+            block.doCommands([op]);
+            if (!inAWord) {
+              if (op[1] == $.Block.ops.TEXT && pattern.test(op[0])) {
+                inAWord = op[0];
+                startHeight = parseInt(block.parent.height());
+              }
+            } else {
+              if (op[1] != $.Block.ops.TEXT || !pattern.test(op[0])) {
+                inAWord = false;
+                startHeight = 0;
+              }
+              else {
+                inAWord += op[0];
+                if (startHeight < parseInt(block.parent.height())) {
+                  if (inAWord.length >= minWordLength) {
+                    for (var k=1;k<=reverse;++k) block.doCommands(i.prev());
+                    block.doCommands([
+                        [null, $.Block.ops.NODE_END],
+                        [splitWord[0], $.Block.ops.NODE],
+                        [null, $.Block.ops.TEXT_NODE],
+                        ['- ', $.Block.ops.TEXT]
+                    ]);
+                    for (var k=1;k<reverse;++k) block.doCommands(i.next());
+                    block.doCommands([
+                        [null, $.Block.ops.NODE_END],
+                        [null, $.Block.ops.NODE_END],
+                        [null, $.Block.ops.TEXT_NODE],
+                    ]);
+                  }
+                  startHeight = parseInt(block.parent.height());
+                }
+              }
+            }
+          }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="source">
+      <p>Nowadays, many services are published via Internet with open APIs, such as Google Map and Amazon S3. Many existing work provided web-based service (WBS) composition environments [5], which are hosted in web-based environments, such as web browsers. In these environments, <em>the service business</em> logic and User Interface (UI) are encapsulated into a single component, called WBS components. Developers are able to create applications, called mashups, by assembling these components, in a rich user experience manner.</p>
+      <img src="img.jpg" style="float:left; margin: 20px">
+      <p>Because of the open nature of Web and <a href="#"><em><span style="color:#f00">Service Oriented Architecture (SOA)</span></em></a>, every organizations and individuals can make their own WBS components and publish them via Web. Hence, WBS components are always developed in a parallel, independent manner. When these components are assembled, it is hard to control and predictable all interactions among them. As a result, <a href='#'>the undesired interactions</a> possibly take place and make the bad impacts, such as demotion of quality of service (QoS) or even crash of the whole system.</p>
+      <p>The problem of undesired interactions in WBS composition is quite similar with the feature interaction problem (FIP) in telecom [6], which has been well studied from 1989. The plentiful achievements and experience can help to solve the interaction problem in WBS composition. Moreover, comparing with FIP in telecom, the interaction problem in WBS composition has its own characteristics. The significant difference between WBS composition environments and traditional software systems is WBS components are actively running entities without design-time and runtime separation. These components can be used without compilation and deployment. Such difference makes WBS composition environments can keep all components online and assemble them just-in-time. Therefore, online techniques should play more important role in FIP detection and resolution in WBS composition.</p>
+      </p>
+      <button id='wb'>Word Break</button> 
+    </div>
+    <div id="container">
+    </div>
+  </body>
+</html>

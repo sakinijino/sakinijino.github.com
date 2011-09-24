@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Float Image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}
+      body {background: #e2e6e9; font: normal 14px Verdana, Arial, Sans-Serif; text-align: left; }
+      p { text-indent: 2em;line-height:1.5em;}
+      em {font-weight:bold; font-style:italic;}
+      .cl:after {content: ".";display: block;height: 0;clear: both;visibility: hidden; }
+
+      div#source, div#container {max-width:920px; margin: 15px auto; background: #fff; padding:10px 25px;}
+      div#source div.l, div#container div.l{position:relative; clear:both; float:left; margin: 20px 20px 20px 0;}
+      div#source div.l img, div#container div.l img {display: block}
+      div#source div.l button, div#container div.l button {position: absolute;font-size:12px;padding:2px;margin: 5px 5px 0}
+      div#source div.l button.up, div#container div.l button.up {left:0px; top:0px}
+      div#source div.l button.down, div#container div.l button.down{left:0px; top:30px}
+    </style>
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../iterator.js"></script>
+    <script type="text/javascript">
+      $(window).load(function() {
+          function setButtons(){
+            $('#container button.up').each(function(index, button){
+              var img = $('#source div.l').eq(index);
+              $(button).click(function(){
+                var l = img.data('lines')-1;
+                l = l<0 ? 0 : l;
+                img.data('lines', l);
+                redraw(); 
+              });
+            });
+            $('#container button.down').each(function(index, button){
+              var img = $('#source div.l').eq(index);
+              $(button).click(function(){
+                var l = img.data('lines')+1;
+                img.data('lines', l);
+                redraw();
+              });
+            });
+          }
+
+          function redraw(){
+            function moveImage(targetBlock, image, movelines, source) {
+              if (movelines==0) return;
+              var curHeight = 0;
+              var heightChangedCount = 0;
+              while(!source.isEnd() && heightChangedCount <= movelines) {
+                curHeight = targetBlock.parent.height(); 
+                targetBlock.doCommands(source.next());
+                if (targetBlock.parent.height() > curHeight) {
+                  heightChangedCount += 1;
+                  if (heightChangedCount > movelines)
+                    targetBlock.doCommands(source.prev());
+                }
+              }
+            }
+            var container = $('div#container').html('');
+            var piter = $('#source p').iterator();
+            var block, img;
+            block = new $.Block(container);
+            $('#source div.l').each(function(i, elem){
+                img = $(elem);
+                moveImage(block, img, img.data('lines'), piter);
+                block = new $.Block(container);
+                block.parent.append(img.clone());
+                var ops = piter.createContainerAtCurrentPos();
+                block.doCommands(ops);
+                if (ops.length !=0) {
+                  var elems = block.parent.find('p')
+                  elems.eq(elems.length-1).css('text-indent', '0');
+                }
+            })
+            while (!piter.isEnd())
+              block.doCommands(piter.next());
+            setButtons();
+          };
+
+          $('#source div.l').data('lines', 0);
+          redraw();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="source" class="cl" style="display:none">
+      <div class="l">
+        <img src="p155482679-1.jpg" alt="">
+        <button class='up'>Up</button><button class='down'>Down</button> 
+      </div>
+      <div class="l">
+        <img src="p155482679-2.jpg" alt="">
+        <button class='up'>Up</button><button class='down'>Down</button> 
+      </div>
+      <div class="l">
+        <img src="p155482679-3.jpg" alt="">
+        <button class='up'>Up</button><button class='down'>Down</button> 
+      </div>
+      <div class="l">
+        <img src="p155482679-4.jpg" alt="">
+        <button class='up'>Up</button><button class='down'>Down</button> 
+      </div>
+      <div class="l">
+        <img src="p155482679-5.jpg" alt="">
+        <button class='up'>Up</button><button class='down'>Down</button> 
+      </div>
+      <p>发奋而为，因为再不写就又拖过这个月了……</p>
+      <p>------------------------------------------------------------------</p>
+      <p>《<a rel="nofollow" href="http://book.douban.com/subject/2301012/">一个岛的可能性（La Possibilité d'une île）</a>》，米歇尔·维勒贝克（<a rel="nofollow" href="http://en.wikipedia.org/wiki/Michel_Houellebecq" target="_blank">Michel Houellebecq</a>），2005年著。余中先译，文汇出版社，2007年。很早买的，但之前一直闷得读不完。不过上个月末利用坐飞机的时候进入，竟然很快就读完了。这本小说的美感建立在两个方面。首先，它是一个“世界观小说”，讲述在一个人类消亡的末世里，克隆人不断阅读母体的“生命叙述”来感受生活。我一向喜欢世界观小说，因为好的世界观小说是在通过狭小的窗口来窥视宏大的设定，这其中有“冰山”的美感。其次，小说由两条线索展开，一条是母体达尼埃尔1第一人称的生活经历，另一条是克隆人对母体生活经历的诠释。而后者因为已经失去了一部分人的能力——比如无从理解“笑”的含义，使得其诠释产生经典的“陌生化”效果。这种无情感诠释对达尼埃尔1叙述的消解，也为小说贴上了虚无主义的标签。稍有遗憾的是，小说的后1/3，也就是叙述的两条线索开始汇聚之后。先是达尼埃尔1逐步拨开“克隆人叙述机制”诞生的面纱，另一方面克隆人又走出“牢笼”进入“世界”去发现“可能之岛”。我以为从这一段直到尾声达尼埃尔24见到大海，破坏了末世不可知的美感——当然可能是为了完结故事不得不做的妥协。</p>
+      <p>不论怎样，这本小说完全打动了我。</p>
+      <p>“尽管我认真阅读了达尼埃尔1的生命叙述，我始终没能彻底明白人们说到的爱情究竟意味着什么，我并没有把握住他们赋予这个词的众多的、互相矛盾的全部意义；我把握住了性别搏斗的粗野，情感隔离那无法忍受的痛苦，但是我始终看不出到底是什么东西使得他们抱有希望。在这些相反的憧憬中，他们可以建立起一种综合形式。”</p>
+      <p>------------------------------------------------------------------</p>
+      <p>《<a rel="nofollow" href="http://book.douban.com/subject/4010951/">巨兽（Leviathan）</a>》，保罗·奥斯特（<a rel="nofollow" href="http://en.wikipedia.org/wiki/Paul_Auster" target="_blank">Paul Auster</a>），1992年著。焦晓菊译，上海人民出版社，2011年。这是《纽约三部曲》之后，读的第二本奥斯特。而这个故事很容易让人联想到三部曲里的最后一个故事——两者有着几乎相同的结构：主人公是个作家，但有一个写作能力更为出色的朋友。这个朋友才华横溢、极具个人魅力，而且稍有一点神经质。在某种机缘巧合下，朋友忽然从意外中领悟“生活的本质”——有些近似于禅宗的顿悟。伴随顿悟的是其生活轨迹的巨变以及从主人公生活中的消失。故事最后，朋友和主人公偶然的碰面，使主人公得以了解一定的“真相”，以讲述整个故事。而朋友则迅速地走向自我毁灭。虽然奥斯特笔下的“朋友”最后选择的生活方式迥异——恐怖分子或者避世者，但他们不约而同地显示着某种“浪漫”、“理想”的特质。这种“浪漫”和“理想”其实一直若隐若现在他们过去的生活中，被“秩序”所压制，但是意外使“秩序”彻底地从他们的生活中退让。从此他们成了实践的“理想主义者”。不幸的是，这种“理想”也导致了毁灭。那么在这过程中，奥斯特到底想表达什么呢？至少在我看来，理想或者秩序只是个人选择，并不存在优劣的区别，而在背景之上凸显出的只有命运的偶然和巧合。</p>
+      <p>“每个人都是孤独的，因此我们无处获得帮助，只能求助于彼此。民主不是来自赏赐，我们必须每天奋斗争取民主，否则就会面临失去民主的危险。惟一可供我们支配的武器就是法律。如果忽视孩子，那我们就是自我毁灭。只有对未来充满信心，我们目前的存在才有意义。”</p>
+      <p>------------------------------------------------------------------</p>
+      <p>《<a rel="nofollow" href="http://book.douban.com/subject/3891900/">金融的逻辑</a>》，陈志武著，国际文化出版公司，2009年。雷指推荐。我承认之前我不觉得有读一读经济方面内容的必要。我更关心类似权利、自由、平等这类概念。如果认为经济是一门数学为基础的科学，那么这和政治哲学是完全不相关的；而如果认为经济繁荣是政治的目的之一，那么我觉得可以避免细节，而更多去纠缠繁荣和其他几个名词的关系。然而不幸的是，在一个人人都“懂”经济的时代，我在聊天中总会陷入“货币战争”的泥潭——经济形势好的国家都是“金融阴谋论”的邪恶国家，而经济形式差的国家则一律是失败国家——其结果是否定任何政治上的优劣。</p>
+      <p>回到这本书，作为各种报刊杂志文章的合集多少有些啰嗦。我在豆瓣上的记录了是：“没时间的话看序言和最后的话就行了。大概讲了三件事：1. 现代金融是跨时间空间的交换活动，因此加强了资本的“流通性”，好处无穷；2. 现代金融需要建构在良好的制度（特别是法治）上；3. 儒家的“家”观念是一种隐式契约的金融活动，所以传统中国文学的“家”很功利，相反西方资本主义的血亲关系和经济活动相分离，所以血亲关系是跟纯粹的亲情。最后这点很有意思，因为他的观点和我们的意识形态教育观念正好相反。”</p>
+      <p>另外推荐一下，前几天在海德沙龙看到的一篇文章《<a rel="nofollow" href="http://headsalon.org/archives/1845.html" target="_blank">经济学：治国术、伦理学还是科学？</a>》。</p>
+      <p>------------------------------------------------------------------</p>
+      <p>《<a rel="nofollow" href="http://book.douban.com/subject/2063519/">地球防卫少年（ぼくらの）</a>》，<a rel="nofollow" href="http://ja.wikipedia.org/wiki/%E9%AC%BC%E9%A0%AD%E8%8E%AB%E5%AE%8F" target="_blank">鬼頭莫宏</a>，2004-2009年连载。台湾长鸿出版社，译者不详。我还在看动漫的时候看过<a rel="nofollow" href="http://movie.douban.com/subject/2330863/">动画版</a>。动画版比较早，超过连载的部分就和漫画没什么关系了——比如动画里可奈活了下来，但漫画里可爱西姆竟是最好的人！漫画07年前后也追过，但没追下来。上个月偶然发现已经完结，花了一个晚上看完的。总得来说，漫画的人物刻画更细腻一些。虽然上尉、宇白、可奈之间的关系仍然是无可救药的八点档电视剧，但是像千鹤、洋介处理就很有味道。另外孝美、洋子、宽治的战斗也都有变化，不像动画里一味卖3D CG。值得一提的是，漫画里的几处留白非常棒。比如洋介的战斗过程完全隐去堪称经典——比动画里说“质量越大，能力越大”不知高了几个级数。此外宇白扫荡、可爱西姆最后一战的处理虽然类似，但是都很到位。</p>
+      <p>- “好了，敌人来了。我能再做一件跟我不搭的事吗？”</p>
+      <p>- “什么事？你应该不需要请求我允许吧？”</p>
+      <p>- “因为那算是，男孩子的梦想吧。”</p>
+      <p>------------------------------------------------------------------</p>
+      <p>《<a rel="nofollow" href="http://book.douban.com/subject/5366486/">我如何成为一名畅销书作家（How I Became a Famous Novelist）</a>》，斯蒂夫·赫利（<a rel="nofollow" href="http://en.wikipedia.org/wiki/Steve_Hely" target="_blank">Steve Hely</a>），2009年著。王秀莉译，北京理工大学出版社，2010年。玩笑书。讲主人公如何为了让前女友在婚礼难堪，靠着抗抑郁药物在屋里憋出一本畅销小说的故事…… 宣传说这书很有争议，但我倒觉得至少在倒数第二段——也就是主人公的电视台辩论那部分——作者多少有点想拨乱反正的意思。只可惜前面用力过猛，到这里对手早就被刻画成骗子，说得再好，也让读者觉得那是一种修辞术而已了。</p>
+      <p>“在1653年，当举国所有神圣的东西遭到破坏和亵渎的时候，罗伯特·雪雷爵士建起了这座教堂，以一己之力在一个最坏的时代中做出了最好的事情，在灾难的时代播下了希望的种子。”</p>
+      <p>“法则1：拒绝真相。…… 法则16 ：包含植物的名字。”</p>
+      <p>------------------------------------------------------------------</p>
+    </div>
+    <div id="container" class="cl">
+    </div>
+  </body>
+</html>

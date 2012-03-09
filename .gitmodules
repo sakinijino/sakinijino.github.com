@@ -1,0 +1,3 @@
+[submodule "tools/kinsokutest"]
+	path = tools/kinsokutest
+	url = git@github.com:sakinijino/kinsokutest.git
